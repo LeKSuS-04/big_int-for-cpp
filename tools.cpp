@@ -1,7 +1,7 @@
 #include "ultimate.h"
 using namespace std;
 
-vector<string> tools::split(string sequence, char separator) {
+vector<string> split(string sequence, char separator) {
 	vector <string> result;
 	string temp = "";
 	for (int i = 0; i < sequence.size(); i++) {
@@ -16,7 +16,7 @@ vector<string> tools::split(string sequence, char separator) {
 	if (temp != "") result.push_back(temp);
 	return result;
 }
-vector<int>	tools::split_int(string sequence, char separator) {
+vector<int>	split_int(string sequence, char separator) {
 	vector <int> result;
 	string temp = "";
 	for (int i = 0; i < sequence.size(); i++) {
@@ -31,7 +31,7 @@ vector<int>	tools::split_int(string sequence, char separator) {
 	if (temp != "") result.push_back(stoi(temp));
 	return result;
 }
-vector<ns_int> tools::split_ns_int(string sequence, char separator) {
+vector<ns_int> split_ns_int(string sequence, char separator) {
 	vector <ns_int> result;
 	string temp = "";
 	for (int i = 0; i < sequence.size(); i++) {
@@ -46,7 +46,7 @@ vector<ns_int> tools::split_ns_int(string sequence, char separator) {
 	if (temp != "") result.push_back(ns_int(temp));
 	return result;
 }
-vector<ns_int> tools::split_bin(string sequence, char separator) {
+vector<ns_int> split_bin(string sequence, char separator) {
 	vector <ns_int> result;
 	string temp = "";
 	for (int i = 0; i < sequence.size(); i++) {
@@ -61,7 +61,7 @@ vector<ns_int> tools::split_bin(string sequence, char separator) {
 	if (temp != "") result.push_back(ns_int(temp, 2));
 	return result;
 }
-vector<ns_int> tools::split_oct(string sequence, char separator) {
+vector<ns_int> split_oct(string sequence, char separator) {
 	vector <ns_int> result;
 	string temp = "";
 	for (int i = 0; i < sequence.size(); i++) {
@@ -76,7 +76,7 @@ vector<ns_int> tools::split_oct(string sequence, char separator) {
 	if (temp != "") result.push_back(ns_int(temp, 8));
 	return result;
 }
-vector<ns_int> tools::split_dec(string sequence, char separator) {
+vector<ns_int> split_dec(string sequence, char separator) {
 	vector <ns_int> result;
 	string temp = "";
 	for (int i = 0; i < sequence.size(); i++) {
@@ -91,7 +91,7 @@ vector<ns_int> tools::split_dec(string sequence, char separator) {
 	if (temp != "") result.push_back(ns_int(temp, 10));
 	return result;
 }
-vector<ns_int> tools::split_hex(string sequence, char separator) {
+vector<ns_int> split_hex(string sequence, char separator) {
 	vector <ns_int> result;
 	string temp = "";
 	for (int i = 0; i < sequence.size(); i++) {
@@ -107,7 +107,7 @@ vector<ns_int> tools::split_hex(string sequence, char separator) {
 	return result;
 }
 
-vector<string> tools::cut(string sequence, int length_of_piece) {
+vector<string> cut(string sequence, int length_of_piece) {
 	vector <string> result;
 	string temp = "";
 	for (int i = 0; i < sequence.size(); i++) {
@@ -121,7 +121,7 @@ vector<string> tools::cut(string sequence, int length_of_piece) {
 	if (temp != "") result.push_back(temp);
 	return result;
 }
-vector<big_int> tools::cut_big_int(string sequence, int length_of_piece) {
+vector<big_int> cut_big_int(string sequence, int length_of_piece) {
 	vector <big_int> result;
 	string temp = "";
 	for (int i = 0; i < sequence.size(); i++) {
@@ -135,7 +135,7 @@ vector<big_int> tools::cut_big_int(string sequence, int length_of_piece) {
 	if (temp != "") result.push_back(big_int(temp));
 	return result;
 }
-vector<ns_int> tools::cut_ns_int(string sequence, int length_of_piece) {
+vector<ns_int> cut_ns_int(string sequence, int length_of_piece) {
 	vector <ns_int> result;
 	string temp = "";
 	for (int i = 0; i < sequence.size(); i++) {
@@ -149,7 +149,7 @@ vector<ns_int> tools::cut_ns_int(string sequence, int length_of_piece) {
 	if (temp != "") result.push_back(ns_int(temp));
 	return result;
 }
-vector<ns_int> tools::cut_bin(string sequence, int length_of_piece) {
+vector<ns_int> cut_bin(string sequence, int length_of_piece) {
 	vector <ns_int> result;
 	string temp = "";
 	for (int i = 0; i < sequence.size(); i++) {
@@ -163,7 +163,7 @@ vector<ns_int> tools::cut_bin(string sequence, int length_of_piece) {
 	if (temp != "") result.push_back(ns_int(temp, 2));
 	return result;
 }
-vector<ns_int> tools::cut_oct(string sequence, int length_of_piece) {
+vector<ns_int> cut_oct(string sequence, int length_of_piece) {
 	vector <ns_int> result;
 	string temp = "";
 	for (int i = 0; i < sequence.size(); i++) {
@@ -177,7 +177,7 @@ vector<ns_int> tools::cut_oct(string sequence, int length_of_piece) {
 	if (temp != "") result.push_back(ns_int(temp, 8));
 	return result;
 }
-vector<ns_int> tools::cut_dec(string sequence, int length_of_piece) {
+vector<ns_int> cut_dec(string sequence, int length_of_piece) {
 	vector <ns_int> result;
 	string temp = "";
 	for (int i = 0; i < sequence.size(); i++) {
@@ -191,7 +191,7 @@ vector<ns_int> tools::cut_dec(string sequence, int length_of_piece) {
 	if (temp != "") result.push_back(ns_int(temp, 10));
 	return result;
 }
-vector<ns_int> tools::cut_hex(string sequence, int length_of_piece) {
+vector<ns_int> cut_hex(string sequence, int length_of_piece) {
 	vector <ns_int> result;
 	string temp = "";
 	for (int i = 0; i < sequence.size(); i++) {
@@ -206,7 +206,7 @@ vector<ns_int> tools::cut_hex(string sequence, int length_of_piece) {
 	return result;
 }
 
-string tools::join(vector<string> sequence, string separator) {
+string join(vector<string> sequence, string separator) {
 	string output = "";
 	for (size_t i = 0; i < sequence.size(); i++) {
 		if (i != 0) output += separator;
@@ -214,7 +214,7 @@ string tools::join(vector<string> sequence, string separator) {
 	}
 	return output;
 }
-string tools::join(vector<int> sequence, string separator) {
+string join(vector<int> sequence, string separator) {
 	string output = "";
 	for (size_t i = 0; i < sequence.size(); i++) {
 		if (i != 0) output += separator;
@@ -222,7 +222,7 @@ string tools::join(vector<int> sequence, string separator) {
 	}
 	return output;
 }
-string tools::join(vector<char> sequence, string separator) {
+string join(vector<char> sequence, string separator) {
 	string output = "";
 	for (size_t i = 0; i < sequence.size(); i++) {
 		if (i != 0) output += separator;
@@ -230,47 +230,72 @@ string tools::join(vector<char> sequence, string separator) {
 	}
 	return output;
 }
-string tools::join(vector<ns_int> sequence, string separator) {
+string join(vector<ns_int> sequence, string separator) {
 	string output = "";
+	bool save_show_base_state = ns_int::show_base;
+	ns_int::show_base = false;
+
 	for (size_t i = 0; i < sequence.size(); i++) {
 		if (i != 0) output += separator;
 		output += string(sequence[i]);
 	}
+
+	ns_int::show_base = save_show_base_state;
 	return output;
 }
-string tools::join_bin(vector<ns_int> sequence, string separator) {
+string join_bin(vector<ns_int> sequence, string separator) {
 	string output = "";
+	bool save_show_base_state = ns_int::show_base;
+	ns_int::show_base = false;
+
 	for (size_t i = 0; i < sequence.size(); i++) {
 		if (i != 0) output += separator;
 		output += string(bin(sequence[i]));
 	}
+
+	ns_int::show_base = save_show_base_state;
 	return output;
 }
-string tools::join_oct(vector<ns_int> sequence, string separator) {
+string join_oct(vector<ns_int> sequence, string separator) {
 	string output = "";
+	bool save_show_base_state = ns_int::show_base;
+	ns_int::show_base = false;
+
 	for (size_t i = 0; i < sequence.size(); i++) {
 		if (i != 0) output += separator;
 		output += string(oct(sequence[i]));
 	}
+
+	ns_int::show_base = save_show_base_state;
 	return output;
 }
-string tools::join_dec(vector<ns_int> sequence, string separator) {
+string join_dec(vector<ns_int> sequence, string separator) {
 	string output = "";
+	bool save_show_base_state = ns_int::show_base;
+	ns_int::show_base = false;
+
 	for (size_t i = 0; i < sequence.size(); i++) {
 		if (i != 0) output += separator;
 		output += string(dec(sequence[i]));
 	}
+
+	ns_int::show_base = save_show_base_state;
 	return output;
 }
-string tools::join_hex(vector<ns_int> sequence, string separator) {
+string join_hex(vector<ns_int> sequence, string separator) {
 	string output = "";
+	bool save_show_base_state = ns_int::show_base;
+	ns_int::show_base = false;
+
 	for (size_t i = 0; i < sequence.size(); i++) {
 		if (i != 0) output += separator;
 		output += string(hex(sequence[i]));
 	}
+
+	ns_int::show_base = save_show_base_state;
 	return output;
 }
 
-bool tools::power_of_two(int n) {
+bool is_power_of_two(int n) {
 	return (n & (n - 1)) == 0 && n > 0;
 }

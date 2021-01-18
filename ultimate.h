@@ -92,8 +92,6 @@ class ns_int {
 private:
 	static const string alphabet;
 	static const int MAX_BASE = 36;
-	static bool show_errors;
-	static bool show_base;
 
 	unsigned short base;
 	vector<unsigned short> value;
@@ -128,7 +126,8 @@ public:
 	ns_int oct();
 	ns_int dec();
 	ns_int hex();
-
+	friend unsigned short get_base(ns_int ns) { return ns.base; }
+	
 	// Converting to other data types
 	operator string() const;
 	operator big_int() const;
@@ -172,53 +171,58 @@ public:
 	friend const ns_int pow(ns_int base, ns_int power);
 	friend const ns_int sqrt(ns_int ns);
 	friend const ns_int root(ns_int ns, ns_int base);
-
-	// Functions for convertion to ASCII and back
-	friend char ASCII(ns_int ns);
-	friend ns_int ASCII(char c);
-	friend vector<char> ASCII(vector<ns_int> sequence);
-	friend vector<ns_int> ASCII(vector<char> sequence);
-	friend string ASCII_get_string(vector<ns_int> sequence);
-	friend vector<ns_int> ASCII_get_bin(string text);
-
-	// Binary operations
-	friend string hemming(ns_int ns, int length_of_set);
-	friend string hemming(vector<ns_int> sequence, int length_of_set);
 	
 	// Output settings
+	static bool show_errors;
+	static bool show_base;
 	friend void ShowBase(bool show) { ns_int::show_base = show; }
 	friend void ShowErrors(bool show) { ns_int::show_errors = show; }
 };
+
+// ================ Operations ================
+char ASCII(ns_int ns);
+ns_int ASCII(char c);
+vector<char> ASCII(vector<ns_int> sequence);
+vector<ns_int> ASCII(vector<char> sequence);
+string ASCII_get_string(vector<ns_int> sequence);
+string ASCII_get_string_from_bin(vector<string> sequence);
+string ASCII_get_string_from_oct(vector<string> sequence);
+string ASCII_get_string_from_dec(vector<string> sequence);
+string ASCII_get_string_from_hex(vector<string> sequence);
+vector<ns_int> ASCII_get_bin(string text);
+
+string hemming(string bits, int length_of_set = 15);
 string hemming(ns_int ns, int length_of_set = 15);
+string hemming(vector<string> sequence, int length_of_set = 15);
 string hemming(vector<ns_int> sequence, int length_of_set = 15);
 
+string elias(string bits);
+string elias(vector<string> bit_sequence);
+string elias(vector<ns_int> bit_sequence);
+// ================ Tools ================
+vector<string> split(string sequence, char separator = ' ');
+vector<int>	split_int(string sequence, char separator = ' ');
+vector<ns_int> split_ns_int(string sequence, char separator = ' ');
+vector<ns_int> split_bin(string sequence, char separator = ' ');
+vector<ns_int> split_oct(string sequence, char separator = ' ');
+vector<ns_int> split_dec(string sequence, char separator = ' ');
+vector<ns_int> split_hex(string sequence, char separator = ' ');
 
-namespace tools {
-	vector<string> split(string sequence, char separator = ' ');
-	vector<int>	split_int(string sequence, char separator = ' ');
-	vector<ns_int> split_ns_int(string sequence, char separator = ' ');
-	vector<ns_int> split_bin(string sequence, char separator = ' ');
-	vector<ns_int> split_oct(string sequence, char separator = ' ');
-	vector<ns_int> split_dec(string sequence, char separator = ' ');
-	vector<ns_int> split_hex(string sequence, char separator = ' ');
+vector<string> cut(string sequence, int length_of_piece = 1);
+vector<big_int> cut_big_int(string sequence, int length_of_piece = 1);
+vector<ns_int> cut_ns_int(string sequence, int length_of_piece = 1);
+vector<ns_int> cut_bin(string sequence, int length_of_piece = 1);
+vector<ns_int> cut_oct(string sequence, int length_of_piece = 1);
+vector<ns_int> cut_dec(string sequence, int length_of_piece = 1);
+vector<ns_int> cut_hex(string sequence, int length_of_piece = 1);
 
-	vector<string> cut(string sequence, int length_of_piece = 1);
-	vector<big_int> cut_big_int(string sequence, int length_of_piece = 1);
-	vector<ns_int> cut_ns_int(string sequence, int length_of_piece = 1);
-	vector<ns_int> cut_bin(string sequence, int length_of_piece = 1);
-	vector<ns_int> cut_oct(string sequence, int length_of_piece = 1);
-	vector<ns_int> cut_dec(string sequence, int length_of_piece = 1);
-	vector<ns_int> cut_hex(string sequence, int length_of_piece = 1);
+string join(vector<string> sequence, string separator = "");
+string join(vector<int> sequence, string separator = "");
+string join(vector<ns_int> sequence, string separator = "");
+string join(vector<char> sequence, string separator = "");
+string join_bin(vector<ns_int> sequence, string separator = "");
+string join_oct(vector<ns_int> sequence, string separator = "");
+string join_dec(vector<ns_int> sequence, string separator = "");
+string join_hex(vector<ns_int> sequence, string separator = "");
 
-	string join(vector<string> sequence, string separator = "");
-	string join(vector<int> sequence, string separator = "");
-	string join(vector<ns_int> sequence, string separator = "");
-	string join(vector<char> sequence, string separator = "");
-	string join_bin(vector<ns_int> sequence, string separator = "");
-	string join_oct(vector<ns_int> sequence, string separator = "");
-	string join_dec(vector<ns_int> sequence, string separator = "");
-	string join_hex(vector<ns_int> sequence, string separator = "");
-
-	bool power_of_two(int n);
-}
-using namespace tools;
+bool is_power_of_two(int n);
