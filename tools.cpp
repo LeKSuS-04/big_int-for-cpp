@@ -299,3 +299,19 @@ string join_hex(vector<ns_int> sequence, string separator) {
 bool is_power_of_two(int n) {
 	return (n & (n - 1)) == 0 && n > 0;
 }
+
+string set_size(string text, int length) {
+	if (text.size() < length) {
+		size_t i = 0;
+
+		while (text.size() < length) {
+			text += text[i];
+			i++;
+		}
+	}
+	else if (text.size() < length) {
+		text = text.substr(0, length);
+	}
+
+	return text;
+}

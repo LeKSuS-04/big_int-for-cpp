@@ -1,55 +1,74 @@
 #include "ultimate.h"
 using namespace std;
 
-char ASCII(ns_int ns) {
+void ascii_set(int standart) {
+	SetConsoleCP(standart);
+	SetConsoleOutputCP(standart);
+}
+char ascii(ns_int ns) {
 	bool save_show_base_state = ns_int::show_base;
 	ns_int::show_base = false;
 	char c = stoi(string(dec(ns)));
 	ns_int::show_base = save_show_base_state;
 	return c;
 }
-ns_int ASCII(char c) {
-	ns_int result(c, 10);
+ns_int ascii(char c, unsigned short base) {
+	ns_int result(c, base);
 	return result;
 }
-vector<char> ASCII(vector<ns_int> sequence) {
+vector<char> ascii(vector<ns_int> sequence) {
 	vector<char> converted(sequence.size());
-	for (size_t i = 0; i < sequence.size(); i++) converted[i] = ASCII(sequence[i]);
+	for (size_t i = 0; i < sequence.size(); i++) converted[i] = ascii(sequence[i]);
 	return converted;
 }
-vector<ns_int> ASCII(vector<char> sequence) {
+vector<ns_int> ascii(vector<char> sequence) {
 	vector<ns_int> converted(sequence.size());
-	for (size_t i = 0; i < sequence.size(); i++) converted[i] = ASCII(sequence[i]);
+	for (size_t i = 0; i < sequence.size(); i++) converted[i] = ascii(sequence[i]);
 	return converted;
 }
-string ASCII_get_string(vector<ns_int> sequence) {
+string ascii_get_string(vector<ns_int> sequence) {
 	string s;
-	for(auto value : sequence) s += ASCII(value);
+	for(auto value : sequence) s += ascii(value);
 	return s;
 }
-string ASCII_get_string_from_bin(vector<string> sequence) {
+string ascii_get_string_from_bin(vector<string> sequence) {
 	string s;
-	for (auto value : sequence) s += ASCII(ns_int(value, 2));
+	for (auto value : sequence) s += ascii(ns_int(value, 2));
 	return s;
 }
-string ASCII_get_string_from_oct(vector<string> sequence) {
+string ascii_get_string_from_oct(vector<string> sequence) {
 	string s;
-	for (auto value : sequence) s += ASCII(ns_int(value, 8));
+	for (auto value : sequence) s += ascii(ns_int(value, 8));
 	return s;
 }
-string ASCII_get_string_from_dec(vector<string> sequence) {
+string ascii_get_string_from_dec(vector<string> sequence) {
 	string s;
-	for (auto value : sequence) s += ASCII(ns_int(value, 10));
+	for (auto value : sequence) s += ascii(ns_int(value, 10));
 	return s;
 }
-string ASCII_get_string_from_hex(vector<string> sequence) {
+string ascii_get_string_from_hex(vector<string> sequence) {
 	string s;
-	for (auto value : sequence) s += ASCII(ns_int(value, 16));
+	for (auto value : sequence) s += ascii(ns_int(value, 16));
 	return s;
 }
-vector<ns_int> ASCII_get_bin(string text) {
+vector<ns_int> ascii_get_bin(string text) {
 	vector<ns_int> converted(text.size());
-	for (size_t i = 0; i < text.size(); i++) converted[i] = ASCII(text[i]);
+	for (size_t i = 0; i < text.size(); i++) converted[i] = ascii(text[i], 2);
+	return converted;
+}
+vector<ns_int> ascii_get_oct(string text) {
+	vector<ns_int> converted(text.size());
+	for (size_t i = 0; i < text.size(); i++) converted[i] = ascii(text[i], 8);
+	return converted;
+}
+vector<ns_int> ascii_get_dec(string text) {
+	vector<ns_int> converted(text.size());
+	for (size_t i = 0; i < text.size(); i++) converted[i] = ascii(text[i], 10);
+	return converted;
+}
+vector<ns_int> ascii_get_hex(string text) {
+	vector<ns_int> converted(text.size());
+	for (size_t i = 0; i < text.size(); i++) converted[i] = ascii(text[i], 16);
 	return converted;
 }
 
@@ -170,4 +189,164 @@ string elias(vector<ns_int> bit_sequence) {
 	for (auto bit_part : bit_sequence) bits += string(bin(bit_part));
 	ns_int::show_base = save_show_base_state;
 	return elias(bits);
+}
+
+string siberian(string sequence) {
+	size_t floors = 0;
+	unsigned int length = sequence.size();
+	while (length >= floors + 1) {
+		++floors;
+		length -= floors;
+	}
+
+	vector<string> table;
+	if (length == 0) {
+		size_t i = 0;
+		while (i < floors) {
+			table.push_back(sequence.substr(0, floors - i));
+			sequence.erase(0, floors - i);
+			++i;
+		}
+	}
+	else if (floors % 2 == 0) {
+		size_t i = 0;
+		while (i <= floors - length) {
+			table.push_back(sequence.substr(0, floors - i));
+			sequence.erase(0, floors - i);
+			++i;
+		}
+		while (i <= floors) {
+			table.push_back(sequence.substr(0, floors - i + 1));
+			sequence.erase(0, floors - i + 1);
+			++i;
+		}
+	}
+	else {
+		size_t i = 0;
+		while (i <= floors - length) {
+			table.push_back(sequence.substr(0, floors - i + 1));
+			sequence.erase(0, floors - i + 1);
+			++i;
+		}
+		while (i < floors) {
+			table.push_back(sequence.substr(0, floors - i));
+			sequence.erase(0, floors - i);
+			++i;
+		}
+	}
+
+
+	size_t line = 0, column = 0;
+	string answer = "";
+	bool dir_up = true;
+	while (true) {
+		answer += table[line][column];
+
+		if (line == 0 && dir_up) {
+			dir_up = false;
+			++column;
+		}
+		else if (column == 0 && !dir_up) {
+			dir_up = true;
+			++line;
+		}
+		else {
+			if (dir_up) {
+				--line;
+				++column;
+			}
+			else {
+				++line;
+				--column;
+			}
+		}
+
+		if (line >= table.size() || column >= table[line].size()) break;
+	}
+
+	return answer;
+}
+
+char russian_add(char c, int add) {
+	string big_alphabet = "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞß";
+	string small_alphabet = "àáâãäå¸æçèéêëìíîïðñòóôõö÷øùúûüýþÿ";
+	if ((c >= 'À' && c <= 'ß') || c == '¨') {
+		int res = big_alphabet.find(c) + add;
+
+		while (res < 0) res += 33;
+		while (res > 32) res -= 33;
+
+		return big_alphabet[res];
+	}
+	if ((c >= 'à' && c <= 'ÿ') || c == '¸') {
+		int res = small_alphabet.find(c) + add;
+
+		while (res < 0) res += 33;
+		while (res > 32) res -= 33;
+
+		return small_alphabet[res];
+	}
+}
+string caesar_letters(string word, int shift) {
+	for (size_t i = 0; i < word.size(); i++) {
+		if (word[i] >= 'A' && word[i] <= 'Z') {
+			word[i] += shift;
+
+			while (word[i] < 'A') word[i] += 26;
+			while (word[i] > 'Z') word[i] -= 26;
+		} 
+		else if (word[i] >= 'a' && word[i] <= 'z') {
+			word[i] += shift;
+
+			while (word[i] < 'a') word[i] += 26;
+			while (word[i] > 'z') word[i] -= 26;
+		}
+		else if ((word[i] >= 'À' && word[i] <= 'ß') || word[i] == '¨') {
+			word[i] = russian_add(word[i], shift);
+		}
+		else if ((word[i] >= 'à' && word[i] <= 'ÿ') || word[i] == '¸') {
+			word[i] = russian_add(word[i], shift);
+		}
+	}
+
+	return word;
+}
+string caesar_numbers(string word, int shift) {
+	for (size_t i = 0; i < word.size(); i++) {
+		if (word[i] >= '0' && word[i] <= '9') {
+			word[i] += shift;
+
+			while (word[i] < '0') word[i] += 10;
+			while (word[i] > '9') word[i] -= 10;
+		}
+	}
+
+	return word;
+}
+vector<string> caesar_letters(vector<string> words, int shift) {
+	for (size_t i = 0; i < words.size(); i++) words[i] = caesar_letters(words[i], shift);
+	return words;
+}
+vector<string> caesar_numbers(vector<string> words, int shift) {
+	for (size_t i = 0; i < words.size(); i++) words[i] = caesar_numbers(words[i], shift);
+	return words;
+}
+
+string gamming(string text, char password) {
+	string answ = "";
+
+	for (size_t i = 0; i < text.size(); i++) {
+		answ += (char)(text[i] ^ password);
+	}
+
+	return answ;
+}
+string gamming(string text, string password) {
+	string answ = "";
+
+	for (size_t i = 0; i < text.size(); i++) {
+		answ += (char)(text[i]) ^ password[i % password.size()];
+	}
+
+	return answ;
 }
