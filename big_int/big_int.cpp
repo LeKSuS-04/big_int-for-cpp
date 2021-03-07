@@ -536,7 +536,12 @@ big_int& big_int::operator %=(const big_int& other) {
 	return *this;
 }
 
-const big_int fact(big_int big) {
+const big_int abs(big_int big) {
+	if (!big.is_positive) big.is_positive = true;
+	return big;
+}
+
+const big_int fact(const big_int& big) {
 	if (big < 0) return -1;
 
 	big_int res = 1;
@@ -551,10 +556,10 @@ const big_int pow(big_int base, big_int power = 2) {
 	if (power % 2 == 0) return pow(base * base, power / 2);
 	else return base * pow(base, power - 1);
 }
-const big_int sqrt(big_int big) {
+const big_int sqrt(const big_int& big) {
 	return root(big, 2);
 }
-const big_int root(big_int big, big_int base = 2) {
+const big_int root(const big_int& big, const big_int& base = 2) {
 	if (base <= 0) return -1;
 	if (base == 1) return big;
 

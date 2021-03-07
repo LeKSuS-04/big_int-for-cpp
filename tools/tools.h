@@ -3,6 +3,10 @@
 #include <vector>
 #include "../ns_int/ns_int.h"
 
+/*	There is a set of functions used for converting data to 
+*	different formats and some other useful functions
+*/
+
 // Splits a string to a vector of strings by separator char; If you don't enter separator char it'd be ' ' (space) by default
 vector<string> split(string sequence, char separator = ' ');
 // Splits a string to a vector of ints by separator char; If you don't enter separator char it'd be ' ' (space) by default

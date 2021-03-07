@@ -642,15 +642,19 @@ ns_int& ns_int::operator %=(const ns_int& other) {
 	return *this;
 }
 
+const ns_int abs(ns_int ns) {
+	if (!ns.is_positive) ns.is_positive = true;
+	return ns;
+}
 const ns_int fact(ns_int ns) {
 	return ns_int(fact(big_int(ns))).to_base(ns.base);
 }
 const ns_int pow(ns_int base, ns_int power = 2) {
 	return ns_int(pow(big_int(base), big_int(power))).to_base(base.base);
 }
-const ns_int sqrt(ns_int ns) {
+const ns_int sqrt(const ns_int& ns) {
 	return root(ns, 2);
 }
-const ns_int root(ns_int ns, ns_int base = 2) {
+const ns_int root(const ns_int& ns, const ns_int& base = 2) {
 	return ns_int(root(big_int(ns), big_int(base))).to_base(ns.base);
 }

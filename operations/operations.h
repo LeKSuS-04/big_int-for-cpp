@@ -5,6 +5,10 @@
 #include "../ns_int/ns_int.h"
 using namespace std;
 
+/*	This is a set of functions that are used for some binary operations 
+*	and data encryption/decryption
+*/
+
 // Sets the ASCII standart
 void ascii_set(int standart = 1251);
 // Consverts a ns_int value to char using ASCII
@@ -64,7 +68,7 @@ vector<string> caesar_letters(vector<string> words, int shift = 1);
 // Returns a sequence of numbers with a letter shift using the Caesar cipher; Shift could be negative; If you don't enter size of shift it'd be 1 by default
 vector<string> caesar_numbers(vector<string> words, int shift = 1);
 
-// Does a gamming on a text using one char
+// Performs a gamming (XOR operation) on a text using one char
 string gamming(string text, char password);
-// Does a gamming on a text using password; If the password is smaller or bigger than the text it'd be looped or cut
+// Performs a gamming (XOR operation) on a text using password; If the password is smaller or bigger than the text it'd be looped or cut
 string gamming(string text, string password);
