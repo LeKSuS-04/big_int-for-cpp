@@ -541,13 +541,18 @@ const big_int abs(big_int big) {
 	return big;
 }
 
+big_int MultiplicateOnSegment(big_int L, const big_int& R) {
+	if (L == R) return R;
+	if (L + 1 == R) return L * R;
+	else {
+		return MultiplicateOnSegment(L, (R + L) / 2) * MultiplicateOnSegment((R + L) / 2 + 1, R);
+	}
+}
 const big_int fact(const big_int& big) {
+	if (big == 0) return 1;
 	if (big < 0) return -1;
 
-	big_int res = 1;
-	for (size_t i = 2; i <= big; i++) res *= i;
-
-	return res;
+	return MultiplicateOnSegment(2, big);
 }
 const big_int pow(big_int base, big_int power = 2) {
 	if (power < 0) return -1;
