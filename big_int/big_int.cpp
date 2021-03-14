@@ -549,6 +549,7 @@ big_int MultiplicateOnSegment(big_int L, const big_int& R) {
 	}
 }
 const big_int fact(const big_int& big) {
+	if (big == 1) return 1;
 	if (big == 0) return 1;
 	if (big < 0) return -1;
 
