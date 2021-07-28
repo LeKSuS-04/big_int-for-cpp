@@ -12,5 +12,3 @@ This is my big integer class implementation for C++. You can use it to perform f
   - pow(big_int, big_int): raises number to given non-negative power
   - sqrt(big_int): calculates square root of a number
   - root(big_int, big_int): Calculates root of a given degree from a number
-
-Check out licence file if you're interested in using this
